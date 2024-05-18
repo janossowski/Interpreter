@@ -1,0 +1,8 @@
+func dodaj (int a) int {
+    return a + 1;
+}
+
+func main () int {
+    int x = 1;
+    return dodaj(x);
+}
