@@ -1,6 +1,5 @@
 module Main where
 
-import Prelude
 import System.Environment ( getArgs )
 import System.Exit        ( exitFailure )
 import Control.Monad      ( when )
@@ -14,6 +13,7 @@ import ParSmol ( pProgram, myLexer )
 import PrintSmol ( Print, printTree )
 
 import Interpreter
+import System.IO (hPutStrLn, stderr)
 
 type Err        = Either String
 type ParseFun a = [Token] -> Err a
@@ -23,18 +23,16 @@ putStrV :: Verbosity -> String -> IO ()
 putStrV v s = when (v > 1) $ putStrLn s
 
 runFile :: Verbosity -> FilePath -> IO ()
-runFile v f = putStrLn f >> readFile f >>= run v
+runFile v f = readFile f >>= run v
 
 run :: Verbosity -> String -> IO ()
 run v s =
   case pProgram ts of
     Left err -> do
       putStrLn "\nParse Failed...\n"
-      mapM_ (putStrV v . showPosToken . mkPosToken) ts
       putStrLn err
       exitFailure
     Right tree -> do
-      putStrLn "\nParse Successful!"
       interpretProgram tree
   where
   ts = myLexer s
@@ -53,5 +51,5 @@ interpretProgram program = do
   let initialState = (Map.empty, Store Map.empty Map.empty Map.empty Map.empty)
   result <- runStateT (runExceptT $ executeProgram program) initialState
   case result of
-    (Left err, _) -> putStrLn $ "Execution failed: " ++ show err
-    (Right _, _) -> putStrLn "Execution completed successfully"
+    (Left err, _) -> hPutStrLn stderr $ "Execution failed: " ++ show err
+    _ -> return ()

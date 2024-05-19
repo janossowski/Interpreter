@@ -1,0 +1,8 @@
+func notdynamic () {
+    y = y + 1;
+}
+
+func main () {
+    int y = 1;
+    notdynamic();
+}

@@ -1,0 +1,7 @@
+func printala() {
+    print("Ala");
+}
+
+func main () {
+    printola();
+}

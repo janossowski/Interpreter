@@ -1,0 +1,4 @@
+IntVal 42
+StringVal "Ala ma"
+StringVal "kota"
+BoolVal True

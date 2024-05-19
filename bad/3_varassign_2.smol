@@ -1,0 +1,7 @@
+func main () {
+    int x = 2;
+    string y = "hello";
+    x = x + 1;
+    print(x);
+    x = y;
+}
