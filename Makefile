@@ -14,12 +14,12 @@ ALEX_OPTS  = --ghc
 
 # Default goal.
 
-all : TestGramatyka
+all : TestSmol
 
 # Rules for building the parser.
 
-AbsGramatyka.hs LexGramatyka.x ParGramatyka.y PrintGramatyka.hs TestGramatyka.hs : gramatyka.cf
-	bnfc --haskell gramatyka.cf
+AbsSmol.hs LexSmol.x ParSmol.y PrintSmol.hs TestSmol.hs : smol.cf
+	bnfc --haskell smol.cf
 
 %.hs : %.y
 	${HAPPY} ${HAPPY_OPTS} $<
@@ -27,7 +27,7 @@ AbsGramatyka.hs LexGramatyka.x ParGramatyka.y PrintGramatyka.hs TestGramatyka.hs
 %.hs : %.x
 	${ALEX} ${ALEX_OPTS} $<
 
-TestGramatyka : AbsGramatyka.hs LexGramatyka.hs ParGramatyka.hs PrintGramatyka.hs TestGramatyka.hs
+TestSmol : AbsSmol.hs LexSmol.hs ParSmol.hs PrintSmol.hs TestSmol.hs
 	${GHC} ${GHC_OPTS} $@
 
 # Rules for cleaning generated files.
@@ -36,7 +36,7 @@ clean :
 	-rm -f *.hi *.o *.log *.aux *.dvi
 
 distclean : clean
-	-rm -f AbsGramatyka.hs AbsGramatyka.hs.bak ComposOp.hs ComposOp.hs.bak DocGramatyka.txt DocGramatyka.txt.bak ErrM.hs ErrM.hs.bak LayoutGramatyka.hs LayoutGramatyka.hs.bak LexGramatyka.x LexGramatyka.x.bak ParGramatyka.y ParGramatyka.y.bak PrintGramatyka.hs PrintGramatyka.hs.bak SkelGramatyka.hs SkelGramatyka.hs.bak TestGramatyka.hs TestGramatyka.hs.bak XMLGramatyka.hs XMLGramatyka.hs.bak ASTGramatyka.agda ASTGramatyka.agda.bak ParserGramatyka.agda ParserGramatyka.agda.bak IOLib.agda IOLib.agda.bak Main.agda Main.agda.bak gramatyka.dtd gramatyka.dtd.bak TestGramatyka LexGramatyka.hs ParGramatyka.hs ParGramatyka.info ParDataGramatyka.hs Makefile
+	-rm -f AbsSmol.hs AbsSmol.hs.bak ComposOp.hs ComposOp.hs.bak DocSmol.txt DocSmol.txt.bak ErrM.hs ErrM.hs.bak LayoutSmol.hs LayoutSmol.hs.bak LexSmol.x LexSmol.x.bak ParSmol.y ParSmol.y.bak PrintSmol.hs PrintSmol.hs.bak SkelSmol.hs SkelSmol.hs.bak TestSmol.hs TestSmol.hs.bak XMLSmol.hs XMLSmol.hs.bak ASTSmol.agda ASTSmol.agda.bak ParserSmol.agda ParserSmol.agda.bak IOLib.agda IOLib.agda.bak Main.agda Main.agda.bak smol.dtd smol.dtd.bak TestSmol LexSmol.hs ParSmol.hs ParSmol.info ParDataSmol.hs Makefile
 
 
 # EOF
